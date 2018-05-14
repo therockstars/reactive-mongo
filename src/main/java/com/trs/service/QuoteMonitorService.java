@@ -21,13 +21,13 @@ public class QuoteMonitorService implements ApplicationListener<ContextRefreshed
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-//        stockQuoteClient.getQuoteStream()
-//                .log("quote-monitor-service")
-//                .subscribe(quote -> {
-//                    Mono<Quote> savedQuote = quoteRepository.save(quote);
-//
-//                    System.out.println("I saved a quote! Id: " +savedQuote.block().getId());
-//                });
+        stockQuoteClient.getQuoteStream()
+                .log("quote-monitor-service")
+                .subscribe(quote -> {
+                    Mono<Quote> savedQuote = quoteRepository.save(quote);
+
+                    System.out.println("I saved a quote! Id: " +savedQuote.toProcessor().block().getId());
+                });
 
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<< GOT EVENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
